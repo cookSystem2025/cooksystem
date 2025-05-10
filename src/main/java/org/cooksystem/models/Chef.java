@@ -50,5 +50,9 @@ public class Chef {
     }
 }
 
+    public boolean matchesIgnoreCase(String a, String b) {
+    return a != null && b != null && a.trim().equalsIgnoreCase(b.trim());
+}
+
 
 }
