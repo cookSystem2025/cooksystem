@@ -68,21 +68,4 @@ public class Cart {
         }
     }
 
-    public boolean checkEmpty(String value) {
-        if (value == null || value.trim().length() == 0) {
-            return true;
-        }
-        return false;
-    }
-
-    public int parseQuantity(String input) {
-    try {
-        int value = Integer.parseInt(input);
-        return value < 0 ? 0 : value;
-    } catch (NumberFormatException e) {
-        return 0;
-    }
-}
-
-
 }
