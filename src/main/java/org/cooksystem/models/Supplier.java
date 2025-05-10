@@ -4,13 +4,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Supplier {
-    private Map<String, Double> priceList = new HashMap<>();
+    private final Map<String, Double> priceList = new HashMap<>();
 
-    public void setPrice(String name, double price) {
-        priceList.put(name, price);
+    public void setPrice(String ingredientName, double price) {
+        priceList.put(ingredientName, price);
     }
 
-    public double getPrice(String name) {
-        return priceList.getOrDefault(name, -1.0);
+    public double getPrice(String ingredientName) {
+        return priceList.getOrDefault(ingredientName, -1.0);
+    }
+
+    public boolean hasIngredient(String ingredientName) {
+        return priceList.containsKey(ingredientName);
+    }
+
+    public Map<String, Double> getPriceList() {
+        return new HashMap<>(priceList);
     }
 }

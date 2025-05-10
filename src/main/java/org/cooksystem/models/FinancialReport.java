@@ -1,8 +1,8 @@
 package org.cooksystem.models;
 
 public class FinancialReport {
-    private double totalRevenue;
-    private int orderCount;
+    private final double totalRevenue;
+    private final int orderCount;
 
     public FinancialReport(double totalRevenue, int orderCount) {
         this.totalRevenue = totalRevenue;
@@ -19,9 +19,6 @@ public class FinancialReport {
 
     @Override
     public String toString() {
-        return "FinancialReport{" +
-                "totalRevenue=" + totalRevenue +
-                ", orderCount=" + orderCount +
-                '}';
+        return "Total Revenue: " + totalRevenue + ", Total Orders: " + orderCount;
     }
 }

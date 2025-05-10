@@ -1,9 +1,9 @@
 package org.cooksystem.models;
 
 public class PurchaseOrder {
-    private String ingredientName;
-    private int quantity;
-    private double unitPrice;
+    private final String ingredientName;
+    private final int quantity;
+    private final double unitPrice;
 
     public PurchaseOrder(String ingredientName, int quantity, double unitPrice) {
         this.ingredientName = ingredientName;
@@ -21,5 +21,11 @@ public class PurchaseOrder {
 
     public double getUnitPrice() {
         return unitPrice;
+    }
+
+    @Override
+    public String toString() {
+        return quantity + " x " + ingredientName + " @ $" + unitPrice;
+
     }
 }

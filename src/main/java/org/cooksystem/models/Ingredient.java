@@ -1,9 +1,9 @@
 package org.cooksystem.models;
 
 public class Ingredient {
-    private String name;
-    private int quantity;
-    private int restockThreshold;
+    private final String name;
+    private final int quantity;
+    private final int restockThreshold;
 
     public Ingredient(String name, int quantity, int restockThreshold) {
         this.name = name;

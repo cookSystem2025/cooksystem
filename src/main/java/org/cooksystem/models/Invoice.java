@@ -1,25 +1,51 @@
 package org.cooksystem.models;
 
-public class Invoice {
-    private String meal;
-    private String ingredients;
-    private double total;
+import java.util.Collections;
+import java.util.Map;
 
-    public Invoice(String meal, String ingredients, double total) {
-        this.meal = meal;
-        this.ingredients = ingredients;
-        this.total = total;
+public class Invoice {
+    private final Map<String, Object> details;
+
+    public Invoice(Map<String, Object> details) {
+        if (details != null) {
+            this.details = details;
+        } else {
+            this.details = Collections.emptyMap();
+        }
+
+
+    }
+
+    public Map<String, Object> getDetails() {
+        return Collections.unmodifiableMap(details);
     }
 
     public String getMeal() {
-        return meal;
+        Object meal = details.get("meal");
+        if (meal instanceof String) {
+            return (String) meal;
+        } else {
+            return "";
+        }
     }
 
-    public String getIngredients() {
-        return ingredients;
+    public Map<String, String> getIngredients() {
+        Object ingredients = details.get("ingredients");
+        if (ingredients instanceof Map) {
+            return (Map<String, String>) ingredients;
+        } else {
+            return Collections.emptyMap();
+        }
+
     }
 
     public double getTotal() {
-        return total;
+        Object total = details.get("total");
+        if (total instanceof Number) {
+            return ((Number) total).doubleValue();
+        } else {
+            return 0.0;
+        }
+
     }
 }

@@ -7,11 +7,11 @@ import java.time.format.DateTimeFormatter;
 
 public class ChefNotifier {
 
-    public boolean shouldNotifyChef(CookingTask task, String currentTimeStr) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-        LocalTime taskTime = LocalTime.parse(task.getStartTime(), formatter);
-        LocalTime currentTime = LocalTime.parse(currentTimeStr, formatter);
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
-        return taskTime.equals(currentTime);
+    public boolean shouldNotifyChef(CookingTask task, String currentTimeStr) {
+        LocalTime taskTime = LocalTime.parse(task.getStartTime(), FORMATTER);
+        LocalTime currentTime = LocalTime.parse(currentTimeStr, FORMATTER);
+        return currentTime.equals(taskTime);
     }
 }

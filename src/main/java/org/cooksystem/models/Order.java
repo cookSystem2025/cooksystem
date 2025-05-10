@@ -1,11 +1,11 @@
 package org.cooksystem.models;
 
 public class Order {
-    private int orderId;
-    private String mealName;
-    private String date;
-    private String ingredients;
-    private double total;  // ✅ NEW field
+    private final int orderId;
+    private final String mealName;
+    private final String date;
+    private final String ingredients;
+    private final double total;
 
     public Order(int orderId, String mealName, String date, String ingredients, double total) {
         this.orderId = orderId;
@@ -16,7 +16,7 @@ public class Order {
     }
 
     public Order(int orderId, String mealName, String date) {
-        this(orderId, mealName, date, null, 0.0);  // Default values
+        this(orderId, mealName, date, null, 0.0);
     }
 
     public int getOrderId() {
@@ -41,10 +41,13 @@ public class Order {
 
     @Override
     public String toString() {
-        return "OrderID: " + orderId +
+        String result = "OrderID: " + orderId +
                 ", Meal: " + mealName +
-                ", Date: " + date +
-                (ingredients != null ? ", Ingredients: " + ingredients : "") +
-                ", Total: " + total;
+                ", Date: " + date;
+        if (ingredients != null && !ingredients.isEmpty()) {
+            result += ", Ingredients: " + ingredients;
+        }
+        result += ", Total: " + total;
+        return result;
     }
 }

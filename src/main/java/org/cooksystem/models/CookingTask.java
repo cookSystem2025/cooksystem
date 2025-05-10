@@ -1,8 +1,8 @@
 package org.cooksystem.models;
 
 public class CookingTask {
-    private String meal;
-    private String startTime;
+    private final String meal;
+    private final String startTime;
 
     public CookingTask(String meal, String startTime) {
         this.meal = meal;

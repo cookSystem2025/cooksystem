@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Cart {
-    private Map<String, Integer> items = new HashMap<>();
+    private final Map<String, Integer> items = new HashMap<>();
 
     public void addMeal(String mealName) {
         items.put(mealName, items.getOrDefault(mealName, 0) + 1);
     }
 
-    public boolean contains(String mealName) {
+    public boolean containsMeal(String mealName) {
         return items.containsKey(mealName);
     }
 
@@ -23,7 +23,7 @@ public class Cart {
     }
 
     public Map<String, Integer> getItems() {
-        return items;
+        return new HashMap<>(items);
     }
 
     public void removeMeal(String mealName) {

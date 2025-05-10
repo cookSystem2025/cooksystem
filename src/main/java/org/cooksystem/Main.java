@@ -1,59 +1,103 @@
 package org.cooksystem;
 
-import org.cooksystem.models.Customer;
-import org.cooksystem.models.Order;
-import org.cooksystem.models.Cart;
+import org.cooksystem.models.*;
+import org.cooksystem.service.*;
 
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
 
-        // 1. Create a customer
-        Customer customer = new Customer("Karam", "Vegan", "Peanuts");
-        System.out.println("Created Customer: " + customer.getCustomerName());
+        System.out.println("=== Welcome to the Special Cook System ===\n");
 
-        // 2. Create past orders
-        Order order1 = new Order(101, "Vegan Pasta", "2025-03-10");
-        Order order2 = new Order(102, "Gluten-Free Pizza", "2025-03-12");
-        customer.addOrder(order1);
-        customer.addOrder(order2);
-        System.out.println("Customer past orders added.");
+        CustomerService customerService = new CustomerService();
+        customerService.savePreferences("Karam", "Vegan", "Nuts");
+        Customer karam = customerService.getCustomer("Karam");
 
-        // 3. Customer views order history
-        System.out.println("\n--- Customer Order History ---");
-        for (Order o : customer.getOrderHistory()) {
-            System.out.println("Order ID: " + o.getOrderId() + ", Meal: " + o.getMealName() + ", Date: " + o.getDate());
+        System.out.println("Customer Profile:");
+        System.out.println("Name: " + karam.getName());
+        System.out.println("Dietary Preference: " + karam.getDietaryPreference());
+        System.out.println("Allergies: " + karam.getAllergy());
+
+        InventoryManager inventory = new InventoryManager();
+        inventory.addIngredient(new Ingredient("Spinach", 3, 10));
+        inventory.addIngredient(new Ingredient("Rice", 15, 10));
+        inventory.addIngredient(new Ingredient("Milk", 2, 5));
+        inventory.addIngredient(new Ingredient("Tomatoes", 1, 4));
+
+        System.out.println("\nInventory Loaded.");
+
+        Supplier supplier = new Supplier();
+        supplier.setPrice("Spinach", 2.5);
+        supplier.setPrice("Rice", 1.0);
+        supplier.setPrice("Milk", 3.2);
+        supplier.setPrice("Tomatoes", 2.0);
+
+        System.out.println("Supplier price list is set.\n");
+
+
+        StockAlertService stockAlert = new StockAlertService();
+        List<Ingredient> ingredientList = new ArrayList<>();
+        ingredientList.add(inventory.getIngredient("Spinach"));
+        ingredientList.add(inventory.getIngredient("Rice"));
+        ingredientList.add(inventory.getIngredient("Milk"));
+        ingredientList.add(inventory.getIngredient("Tomatoes"));
+
+        stockAlert.evaluate(ingredientList);
+
+        System.out.println("Low Stock Items:");
+        for (String name : stockAlert.getLowStockMap().keySet()) {
+            PurchaseOrder po = inventory.generatePurchaseOrder(name, supplier);
+            if (po != null) {
+                System.out.println(" - " + po);
+            }
         }
 
-        // 4. Customer reorders an old meal
-        Cart cart = new Cart();
-        Order reorderMeal = customer.getOrderById(101);
-        if (reorderMeal != null) {
-            cart.addMeal(reorderMeal.getMealName());
-            System.out.println("\nAdded to cart: " + reorderMeal.getMealName());
+        Map<String, Boolean> availability = Map.of(
+                "Fish", true,
+                "Cheese", true,
+                "Nuts", false
+        );
+        IngredientValidator validator = new IngredientValidator(availability);
+        String result = validator.validateSelection("Fish", "Cheese");
+        if (!result.isEmpty()) {
+            System.out.println("\nValidation Warning: " + result);
         }
 
-        // 5. Admin retrieves all customer orders
-        System.out.println("\n--- Admin View Orders ---");
-        for (Order o : customer.getOrderHistory()) {
-            System.out.println("Meal: " + o.getMealName() + " | Ingredients: (not loaded in Main)");
-        }
+        CookingTask task = new CookingTask("Vegan Bowl", "14:30");
+        ChefNotifier notifier = new ChefNotifier();
+        boolean notify = notifier.shouldNotifyChef(task, "14:30");
+        System.out.println("\nNotify Chef to start? " + notify);
 
-        // 6. Chef suggests a meal plan (simply first meal)
-        System.out.println("\n--- Chef Suggest Meal Plan ---");
-        if (!customer.getOrderHistory().isEmpty()) {
-            Order firstMeal = customer.getOrderHistory().iterator().next();
-            System.out.println("Suggested Meal Plan: Based on " + firstMeal.getMealName());
-        }
+        DeliverySchedule delivery = new DeliverySchedule("Karam", "18:00");
+        ReminderService reminderService = new ReminderService();
+        boolean remind = reminderService.shouldSendReminder(delivery, "17:55");
+        System.out.println("Send Delivery Reminder? " + remind);
 
-        // 7. Simulate ingredient substitution
-        System.out.println("\n--- Simulate Ingredient Substitution ---");
-        String unavailableIngredient = "Chicken";
-        String safeAlternative = "Tofu"; // Simple hardcoded
-        System.out.println("Ingredient " + unavailableIngredient + " is unavailable. Suggested alternative: " + safeAlternative);
+        Map<String, String> selectedIngredients = Map.of(
+                "Spinach", "100g",
+                "Rice", "200g"
+        );
+        InvoiceService invoiceService = new InvoiceService();
+        Invoice invoice = invoiceService.generateInvoice("Vegan Bowl", selectedIngredients, 25.0);
 
-        System.out.println("\nSimulation completed successfully!");
+        System.out.println("\nGenerated Invoice:");
+        System.out.println("Meal: " + invoice.getMeal());
+        System.out.println("Ingredients: " + invoice.getIngredients());
+        System.out.println("Total: $" + invoice.getTotal());
+
+        Map<String, Double> completedOrders = new HashMap<>();
+        completedOrders.put("Vegan Bowl", 25.0);
+        completedOrders.put("Chicken Curry", 45.0);
+        completedOrders.put("Pasta", 30.0);
+
+        ReportService reportService = new ReportService();
+        FinancialReport report = reportService.generateReport(completedOrders);
+
+        System.out.println("\nFinancial Report:");
+        System.out.println("Total Revenue: $" + report.getTotalRevenue());
+        System.out.println("Total Orders: " + report.getOrderCount());
+
+        System.out.println("\n=== End of Simulation ===");
     }
 }

@@ -2,8 +2,8 @@ package org.cooksystem.models;
 
 public class Chef {
 
-    private String name;
-    private String id;
+    private final String name;
+    private final String id;
 
     public Chef(String name, String id) {
         this.name = name;
@@ -17,6 +17,4 @@ public class Chef {
     public String getId() {
         return id;
     }
-
-
 }

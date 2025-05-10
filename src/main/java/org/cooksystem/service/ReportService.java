@@ -6,15 +6,15 @@ import java.util.Map;
 
 public class ReportService {
 
-    public FinancialReport generateReport(Map<String, Double> ordersMap) {
+    public FinancialReport generateReport(Map<String, Double> orders) {
         double totalRevenue = 0;
-        int orderCount = 0;
+        int totalOrders = 0;
 
-        for (Map.Entry<String, Double> entry : ordersMap.entrySet()) {
-            totalRevenue += entry.getValue();
-            orderCount++;
+        for (double amount : orders.values()) {
+            totalRevenue += amount;
+            totalOrders++;
         }
 
-        return new FinancialReport(totalRevenue, orderCount);
+        return new FinancialReport(totalRevenue, totalOrders);
     }
 }

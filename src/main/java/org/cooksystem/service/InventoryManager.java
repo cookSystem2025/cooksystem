@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class InventoryManager {
 
-    private Map<String, Ingredient> ingredients = new HashMap<>();
+    private final Map<String, Ingredient> ingredients = new HashMap<>();
 
     public void addIngredient(Ingredient ingredient) {
         ingredients.put(ingredient.getName(), ingredient);
@@ -18,12 +18,15 @@ public class InventoryManager {
     }
 
     public PurchaseOrder generatePurchaseOrder(String name, Supplier supplier) {
-        Ingredient ing = getIngredient(name);
-        if (ing != null && ing.needsRestocking()) {
-            int qtyToOrder = ing.getRestockThreshold() - ing.getQuantity();
-            double price = supplier.getPrice(name);
-            return new PurchaseOrder(name, qtyToOrder, price);
+        Ingredient ingredient = getIngredient(name);
+
+        if (ingredient == null || !ingredient.needsRestocking()) {
+            return null;
         }
-        return null;
+
+        int needed_quantity = ingredient.getRestockThreshold() - ingredient.getQuantity();
+        double unitPrice = supplier.getPrice(name);
+
+        return new PurchaseOrder(name, needed_quantity, unitPrice);
     }
 }

@@ -1,16 +1,16 @@
 package org.cooksystem.models;
 
 public class DeliverySchedule {
-    private String customer;
-    private String deliveryTime;
+    private final String customerName;
+    private final String deliveryTime;
 
-    public DeliverySchedule(String customer, String deliveryTime) {
-        this.customer = customer;
+    public DeliverySchedule(String customerName, String deliveryTime) {
+        this.customerName = customerName;
         this.deliveryTime = deliveryTime;
     }
 
-    public String getCustomer() {
-        return customer;
+    public String getCustomerName() {
+        return customerName;
     }
 
     public String getDeliveryTime() {
