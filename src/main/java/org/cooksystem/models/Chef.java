@@ -32,6 +32,7 @@ public class Chef {
         }
         return "";
     }
-
-
+    public boolean isBlankInput(String text) {
+        return text == null || text.trim().equals("");
+    }
 }
