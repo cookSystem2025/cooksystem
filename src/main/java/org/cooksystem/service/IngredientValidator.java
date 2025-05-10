@@ -12,10 +12,10 @@ public class IngredientValidator {
 
     public String validateSelection(String ingredient1, String ingredient2) {
         if (!isAvailable(ingredient1)) {
-            return ingredient1 + " is not available";
+            return ingredient1 + " are not available";
         }
         if (!isAvailable(ingredient2)) {
-            return ingredient2 + " is not available";
+            return ingredient2 + " are not available";
         }
         if (areIncompatible(ingredient1, ingredient2)) {
             return "Fish and cheese don’t mix";
