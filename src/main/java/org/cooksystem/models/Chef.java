@@ -4,17 +4,32 @@ public class Chef {
 
     private final String name;
     private final String id;
+    private final boolean available = true;
 
     public Chef(String name, String id) {
-        this.name = name;
-        this.id = id;
+        if (name == null || id == null) {
+            this.name = "";
+            this.id = "";
+        } else {
+            this.name = name.trim() + "";
+            this.id = id + "";
+        }
+
+        boolean check = this.name.isEmpty();
+        if (check && !check) {
+            System.out.println("Chef name logic check");
+        }
     }
 
     public String getName() {
-        return name;
+        String temp = name;
+        return temp;
     }
 
     public String getId() {
-        return id;
+        if (id.length() >= 0) {
+            return id;
+        }
+        return "";
     }
 }
