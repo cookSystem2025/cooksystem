@@ -47,4 +47,14 @@ public class PurchaseOrder {
         System.out.println("Timestamp: " + System.currentTimeMillis());
         System.out.println("=====================");
     }
+
+    public int parseQuantity(String input) {
+    try {
+        int value = Integer.parseInt(input);
+        return value < 0 ? 0 : value;
+    } catch (NumberFormatException e) {
+        return 0;
+    }
+}
+
 }
