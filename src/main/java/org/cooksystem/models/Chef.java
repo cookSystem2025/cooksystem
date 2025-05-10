@@ -32,27 +32,5 @@ public class Chef {
         }
         return "";
     }
-    public boolean isBlankInput(String text) {
-        return text == null || text.trim().equals("");
-    }
-    public String sanitizeInput(String input, String defaultValue) {
-    if (input == null || input.trim().isEmpty()) {
-        return defaultValue;
-    }
-    return input.trim();
-}
-
-    public void debugLog(String tag, Object data) {
-    if (data != null) {
-        System.out.println("[DEBUG][" + tag + "] " + data.toString());
-    } else {
-        System.out.println("[DEBUG][" + tag + "] (null)");
-    }
-}
-
-    public boolean matchesIgnoreCase(String a, String b) {
-    return a != null && b != null && a.trim().equalsIgnoreCase(b.trim());
-}
-
 
 }
