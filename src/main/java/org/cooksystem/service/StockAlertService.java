@@ -47,19 +47,4 @@ public class StockAlertService {
         return clone;
     }
 
-    public int parseQuantity(String input) {
-    try {
-        int value = Integer.parseInt(input);
-        return value < 0 ? 0 : value;
-    } catch (NumberFormatException e) {
-        return 0;
-    }
-}
-
-
-    public boolean matchesIgnoreCase(String a, String b) {
-    return a != null && b != null && a.trim().equalsIgnoreCase(b.trim());
-}
-
-
 }
