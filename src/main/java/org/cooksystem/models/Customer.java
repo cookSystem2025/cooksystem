@@ -60,4 +60,11 @@ public class Customer {
         }
         return tempMap.values();
     }
+    public String sanitizeInput(String input, String defaultValue) {
+    if (input == null || input.trim().isEmpty()) {
+        return defaultValue;
+    }
+    return input.trim();
+}
+
 }
