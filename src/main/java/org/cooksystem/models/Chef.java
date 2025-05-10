@@ -35,4 +35,11 @@ public class Chef {
     public boolean isBlankInput(String text) {
         return text == null || text.trim().equals("");
     }
+    public String sanitizeInput(String input, String defaultValue) {
+    if (input == null || input.trim().isEmpty()) {
+        return defaultValue;
+    }
+    return input.trim();
+}
+
 }
