@@ -68,4 +68,11 @@ public class Cart {
         }
     }
 
+    public boolean checkEmpty(String value) {
+        if (value == null || value.trim().length() == 0) {
+            return true;
+        }
+        return false;
+    }
+
 }
