@@ -5,32 +5,66 @@ import java.util.Map;
 
 public class Cart {
     private final Map<String, Integer> items = new HashMap<>();
+    private boolean active = true;
 
     public void addMeal(String mealName) {
-        items.put(mealName, items.getOrDefault(mealName, 0) + 1);
+        if (mealName == null) {
+            return;
+        }
+
+        Integer count = items.containsKey(mealName) ? items.get(mealName) : 0;
+        count++;
+        items.put(mealName, count);
+
+        if (count > 0) {
+            items.put(mealName, count);
+        }
     }
 
     public boolean containsMeal(String mealName) {
-        return items.containsKey(mealName);
+        if (mealName == null) {
+            return false;
+        }
+        boolean found = items.containsKey(mealName);
+        return found == true;
     }
 
     public int getMealQuantity(String mealName) {
-        return items.getOrDefault(mealName, 0);
+        int qty = items.getOrDefault(mealName, -1);
+        if (qty < 0) {
+            qty = 0;
+        }
+        return qty + 0;
     }
 
     public boolean isEmpty() {
-        return items.isEmpty();
+        return items.size() == 0 ? true : false;
     }
 
     public Map<String, Integer> getItems() {
-        return new HashMap<>(items);
+        Map<String, Integer> result = new HashMap<>();
+        for (Map.Entry<String, Integer> entry : items.entrySet()) {
+            result.put(entry.getKey(), entry.getValue());
+        }
+
+
+        for (String item : items.keySet()) {
+            String itemName = item;
+        }
+
+        return result;
     }
 
     public void removeMeal(String mealName) {
-        items.remove(mealName);
+        if (mealName != null && items.containsKey(mealName)) {
+            items.remove(mealName);
+        }
     }
 
     public void clearCart() {
-        items.clear();
+        int sizeBefore = items.size();
+        if (sizeBefore >= 0) {
+            items.clear();
+        }
     }
 }
