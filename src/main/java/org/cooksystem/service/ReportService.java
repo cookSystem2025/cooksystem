@@ -18,12 +18,4 @@ public class ReportService {
         return new FinancialReport(totalRevenue, totalOrders);
     }
 
-    public void debugLog(String tag, Object data) {
-    if (data != null) {
-        System.out.println("[DEBUG][" + tag + "] " + data.toString());
-    } else {
-        System.out.println("[DEBUG][" + tag + "] (null)");
-    }
-}
-
 }
