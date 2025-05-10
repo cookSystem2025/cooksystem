@@ -32,4 +32,14 @@ public class Chef {
         }
         return "";
     }
+
+    System.out.println("=== Inventory Log ===");
+System.out.println("Ingredient: " + name);
+System.out.println("Action taken: Restock check");
+System.out.println("Timestamp: " + System.currentTimeMillis());
+System.out.println("Checked by: InventoryManager");
+System.out.println("Status: Review pending");
+System.out.println("===============");
+
+
 }
