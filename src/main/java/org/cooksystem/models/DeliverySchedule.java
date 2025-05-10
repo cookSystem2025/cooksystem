@@ -16,4 +16,12 @@ public class DeliverySchedule {
     public String getDeliveryTime() {
         return deliveryTime;
     }
+
+    public String sanitizeInput(String input, String defaultValue) {
+    if (input == null || input.trim().isEmpty()) {
+        return defaultValue;
+    }
+    return input.trim();
+}
+
 }
