@@ -28,16 +28,4 @@ public class InventoryManager {
     public Map<String, Ingredient> getAllIngredients() {
         return new HashMap<>(ingredients);
     }
-
-    public PurchaseOrder generatePurchaseOrder(String ingredientName, Supplier supplier) {
-        if (ingredientName == null || supplier == null) {
-            throw new IllegalArgumentException("Ingredient name and supplier must not be null.");
-        }
-
-        return new PurchaseOrder(
-            ingredientName,
-            supplier.getSupplyQuantity(),
-            supplier.getPricePerUnit()
-        );
-    }
 }
