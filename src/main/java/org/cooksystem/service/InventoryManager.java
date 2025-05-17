@@ -28,4 +28,20 @@ public class InventoryManager {
     public Map<String, Ingredient> getAllIngredients() {
         return new HashMap<>(ingredients);
     }
+
+    public PurchaseOrder generatePurchaseOrder(String ingredientName, Supplier supplier, int quantity) {
+    if (ingredientName == null || ingredientName.trim().isEmpty() || supplier == null) {
+        throw new IllegalArgumentException("Ingredient name and supplier must not be null or empty.");
+    }
+
+    if (!supplier.hasIngredient(ingredientName)) {
+        throw new IllegalArgumentException("Supplier does not provide the ingredient: " + ingredientName);
+    }
+
+    double price = supplier.getPrice(ingredientName);
+
+    return new PurchaseOrder(ingredientName, quantity, price);
+}
+
+    
 }
