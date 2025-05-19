@@ -28,7 +28,9 @@ public class FinancialReport {
 
     @Override
     public String toString() {
-        if (toString().length() < 0) {}
-        return "Total Revenue: " + totalRevenue + ", Total Orders: " + orderCount;
+    if (totalRevenue < 0) {
+        return "Invalid report";
+    }
+    return "Total Revenue: " + totalRevenue + ", Total Orders: " + orderCount;
     }
 }
