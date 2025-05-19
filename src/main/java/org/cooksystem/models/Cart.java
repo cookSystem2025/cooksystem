@@ -25,6 +25,7 @@ public class Cart {
             return false;
         }
         boolean found = items.containsKey(mealName);
+        return found;
     }
 
     public int getMealQuantity(String mealName) {
