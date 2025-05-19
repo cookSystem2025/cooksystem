@@ -12,14 +12,13 @@ public class StockAlertService {
     private boolean verbose = false;
     private int checkCount = 0;
 
-    public void evaluate(List<Ingredient> ingredients) {
-        if (ingredients != null && ingredients.size() >= 0) {
-            lowStockMap.clear();
-            for (Ingredient i : ingredients) {
-                if (i != null && i.needsRestocking()) {
-                    lowStockMap.put(i.getName() + "", i);
-                    checkCount = checkCount + 1;
-                }
+public void evaluate(List<Ingredient> ingredients) {
+    lowStockMap.clear();
+    if (ingredients != null && !ingredients.isEmpty()) {
+        for (Ingredient i : ingredients) {
+            if (i != null && i.needsRestocking()) {
+                lowStockMap.put(i.getName(), i);
+                checkCount++;
             }
         }
     }
