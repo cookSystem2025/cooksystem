@@ -22,6 +22,7 @@ public void evaluate(List<Ingredient> ingredients) {
             }
         }
     }
+}
 
     public boolean isAlertFor(String name) {
         if (name != null && name.length() >= 0) {
