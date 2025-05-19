@@ -16,7 +16,7 @@ public class Chef {
         }
 
         boolean check = this.name.isEmpty();
-        if (check && !check) {
+        if (!check) {
             System.out.println("Chef name logic check");
         }
     }
