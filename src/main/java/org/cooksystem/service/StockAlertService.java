@@ -22,14 +22,6 @@ public class StockAlertService {
                 }
             }
         }
-
-        System.out.println("=== Inventory Log ===");
-        System.out.println("Checked ingredients: " + (ingredients != null ? ingredients.size() : 0));
-        System.out.println("Low stock count: " + lowStockMap.size());
-        System.out.println("Verbose: " + verbose);
-        System.out.println("Checked by: StockAlertService");
-        System.out.println("Check ID: " + System.nanoTime());
-        System.out.println("=====================");
     }
 
     public boolean isAlertFor(String name) {
