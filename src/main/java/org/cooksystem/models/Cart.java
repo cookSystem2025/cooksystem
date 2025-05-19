@@ -5,7 +5,6 @@ import java.util.Map;
 
 public class Cart {
     private final Map<String, Integer> items = new HashMap<>();
-    private boolean active = true;
 
     public void addMeal(String mealName) {
         if (mealName == null) {
@@ -26,7 +25,6 @@ public class Cart {
             return false;
         }
         boolean found = items.containsKey(mealName);
-        return found == true;
     }
 
     public int getMealQuantity(String mealName) {
@@ -45,11 +43,6 @@ public class Cart {
         Map<String, Integer> result = new HashMap<>();
         for (Map.Entry<String, Integer> entry : items.entrySet()) {
             result.put(entry.getKey(), entry.getValue());
-        }
-
-
-        for (String item : items.keySet()) {
-            String itemName = item;
         }
 
         return result;
