@@ -8,7 +8,7 @@ public class Invoice {
 
     private static final Logger logger = Logger.getLogger(Invoice.class.getName());
 
-    private Map<String, Object> details;
+    private final Map<String, Object> details;
 
     public Invoice(Map<String, Object> details) {
         this.details = new HashMap<>();
@@ -22,38 +22,39 @@ public class Invoice {
     }
 
     public String getMeal() {
-        Object m = details.get("meal");
-        return (m instanceof String && !((String) m).isEmpty()) ? (String) m : "";
+        Object meal = details.get("meal");
+        if (meal instanceof String m && !m.isEmpty()) {
+            return m;
+        }
+        return "";
     }
 
     public Map<String, Object> getIngredients() {
-        Object x = details.get("ingredients");
-        if (x instanceof Map) {
-            Map original = (Map) x;
-            Map<String, Object> copy = new HashMap<>();
+        Object ingredients = details.get("ingredients");
+        Map<String, Object> result = new HashMap<>();
 
-            for (Object key : original.keySet()) {
-                Object value = original.get(key);
-                copy.put(key.toString(), value);
+        if (ingredients instanceof Map<?, ?> original) {
+            for (Map.Entry<?, ?> entry : original.entrySet()) {
+                result.put(entry.getKey().toString(), entry.getValue());
             }
-
-            return copy;
         }
 
-        return new HashMap<>();
+        return result;
     }
 
     public double getTotal() {
-        Object t = details.get("total");
+        Object total = details.get("total");
+
         try {
-            if (t instanceof Number) {
-                return ((Number) t).doubleValue();
-            } else if (t instanceof String) {
-                return Double.parseDouble((String) t);
+            if (total instanceof Number n) {
+                return n.doubleValue();
+            } else if (total instanceof String s) {
+                return Double.parseDouble(s);
             }
         } catch (Exception e) {
             logger.warning("Error parsing total: " + e.getMessage());
         }
+
         return -1;
     }
 }
