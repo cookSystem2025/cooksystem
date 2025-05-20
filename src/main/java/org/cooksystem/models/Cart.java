@@ -27,14 +27,7 @@ public class Cart {
         boolean found = items.containsKey(mealName);
         return found;
     }
-
-    public int getMealQuantity(String mealName) {
-        int qty = items.getOrDefault(mealName, -1);
-        if (qty < 0) {
-            qty = 0;
-        }
-        return qty + 0;
-    }
+    
 
     public boolean isEmpty() {
         return items.size() == 0 ? true : false;
@@ -45,21 +38,7 @@ public class Cart {
         for (Map.Entry<String, Integer> entry : items.entrySet()) {
             result.put(entry.getKey(), entry.getValue());
         }
-
         return result;
-    }
-
-    public void removeMeal(String mealName) {
-        if (mealName != null && items.containsKey(mealName)) {
-            items.remove(mealName);
-        }
-    }
-
-    public void clearCart() {
-        int sizeBefore = items.size();
-        if (sizeBefore >= 0) {
-            items.clear();
-        }
     }
 
 }
