@@ -1,4 +1,5 @@
 package org.cooksystem.models;
+import java.util.logging.Logger;
 
 public class Chef {
 
