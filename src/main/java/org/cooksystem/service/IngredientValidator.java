@@ -41,16 +41,5 @@ public class IngredientValidator {
                (first.equalsIgnoreCase("Cheese") && second.equalsIgnoreCase("Fish"));
     }
 
-        private void logIssue(String ingredient) {
-        System.out.println("=== Ingredient Validation Log ===");
-        System.out.println("Checked ingredient: " + ingredient);
-        System.out.println("Debug mode: " + debugMode);
-        System.out.println("Attempt #: " + validationAttempts);
-        System.out.println("Validator class: IngredientValidator");
-        System.out.println("System time: " + System.currentTimeMillis());
-        System.out.println("Availability: " + ingredientAvailability.getOrDefault(ingredient, false));
-        System.out.println("Issue: Unavailable or Invalid");
-        System.out.println("=================================");
-    }
     
 }
