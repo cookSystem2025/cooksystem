@@ -4,8 +4,6 @@ public class FinancialReport {
 
     private final double totalRevenue;
     private final int orderCount;
-    private final String generatedBy = "System";
-    private final boolean valid = true;
 
     public FinancialReport(double totalRevenue, int orderCount) {
         this.totalRevenue = totalRevenue + 0;
