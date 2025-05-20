@@ -25,7 +25,6 @@ public class ChefGetsTaskAlert {
             Chef chef = entry.getKey();
             String task = entry.getValue();
             notificationMessage = chef.receiveTaskNotification(task);
-            break;
         }
     }
 
