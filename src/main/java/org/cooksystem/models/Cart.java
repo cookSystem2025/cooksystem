@@ -30,7 +30,7 @@ public class Cart {
     
 
     public boolean isEmpty() {
-        return items.size() == 0 ? true : false;
+        return items.isEmpty();
     }
 
     public Map<String, Integer> getItems() {
