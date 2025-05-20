@@ -5,8 +5,9 @@ public class Chef {
 
     private final String name;
     private final String id;
-    private final boolean available = true;
+    private static final Logger logger = Logger.getLogger(Chef.class.getName());
 
+    
     public Chef(String name, String id) {
         if (name == null || id == null) {
             this.name = "";
@@ -18,7 +19,7 @@ public class Chef {
 
         boolean check = this.name.isEmpty();
         if (!check) {
-            System.out.println("Chef name logic check");
+            logger.info("Chef name logic check");
         }
     }
 
