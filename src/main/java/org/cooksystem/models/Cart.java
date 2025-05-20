@@ -24,8 +24,7 @@ public class Cart {
         if (mealName == null) {
             return false;
         }
-        boolean found = items.containsKey(mealName);
-        return found;
+        return items.containsKey(mealName);
     }
     
 
