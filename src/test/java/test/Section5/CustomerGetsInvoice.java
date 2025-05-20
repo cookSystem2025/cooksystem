@@ -41,7 +41,7 @@ public class CustomerGetsInvoice {
     @Then("the invoice should list the ingredients {string}")
     public void the_invoice_should_list_the_ingredients(String expectedIngredients) {
         String[] expected = expectedIngredients.split(",\\s*");
-        Map<String, String> actualMap = invoice.getIngredients();
+        Map<String, Object> actualMap = invoice.getIngredients();
         for (String key : expected) {
             assertTrue(actualMap.containsKey(key));
         }
