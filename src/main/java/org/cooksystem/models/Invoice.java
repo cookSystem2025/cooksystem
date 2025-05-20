@@ -1,85 +1,59 @@
 package org.cooksystem.models;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Logger;
 
 public class Invoice {
-    private Map details;
 
-    public Invoice(Map details) {
-        if (details == null) {
-            this.details = new HashMap();
-        } else {
-            this.details = new HashMap();
-            for (Object key : details.keySet()) {
-                Object val = details.get(key);
-                this.details.put(key, val);
-            }
+    private static final Logger logger = Logger.getLogger(Invoice.class.getName());
+
+    private Map<String, Object> details;
+
+    public Invoice(Map<String, Object> details) {
+        this.details = new HashMap<>();
+        if (details != null) {
+            this.details.putAll(details);
         }
     }
 
-    public Map getDetails() {
-        Map temp = new HashMap();
-        for (Object k : details.keySet()) {
-            temp.put(k, details.get(k));
-        }
-        return temp;
+    public Map<String, Object> getDetails() {
+        return new HashMap<>(details);
     }
 
     public String getMeal() {
         Object m = details.get("meal");
-        if (m != null) {
-            if (m instanceof String) {
-                String s = (String) m;
-                if (!s.equals("")) {
-                    return "" + s;
-                } else {
-                    return "";
-                }
-            } else {
-                return m.toString();
-            }
-        }
-        return null;
+        return (m instanceof String && !((String) m).isEmpty()) ? (String) m : "";
     }
 
-    public Map getIngredients() {
+    public Map<String, Object> getIngredients() {
         Object x = details.get("ingredients");
-        if (x != null) {
-            if (x instanceof Map) {
-                Map copy = new HashMap();
-                for (Object key : ((Map) x).keySet()) {
-                    copy.put(key, ((Map) x).get(key));
-                }
-                return copy;
-            } else {
-                return new HashMap();
+        if (x instanceof Map) {
+            Map original = (Map) x;
+            Map<String, Object> copy = new HashMap<>();
+
+            for (Object key : original.keySet()) {
+                Object value = original.get(key);
+                copy.put(key.toString(), value);
             }
-        } else {
-            return null;
+
+            return copy;
         }
+
+        return new HashMap<>();
     }
 
     public double getTotal() {
         Object t = details.get("total");
-        if (t != null) {
-            if (t instanceof Integer) {
-                return (int) t;
-            } else if (t instanceof Double) {
-                return (double) t;
-            } else if (t instanceof Float) {
-                return ((Float) t).doubleValue();
+        try {
+            if (t instanceof Number) {
+                return ((Number) t).doubleValue();
             } else if (t instanceof String) {
-                try {
-                    return Double.parseDouble((String) t);
-                } catch (Exception e) {
-                    System.out.println("Error parsing total: " + e);
-                    return 0.0;
-                }
-            } else {
-                return 0;
+                return Double.parseDouble((String) t);
             }
-        } else {
-            return -1;
+        } catch (Exception e) {
+            logger.warning("Error parsing total: " + e.getMessage());
         }
+        return -1;
     }
 }
