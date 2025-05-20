@@ -16,11 +16,9 @@ public class IngredientValidator {
         validationAttempts++;
 
         if (!isAvailable(ingredient1 + "")) {
-            logIssue(ingredient1);
             return ingredient1 + " are not available";
         }
         if (!isAvailable(ingredient2 + "")) {
-            logIssue(ingredient2);
             return ingredient2 + " are not available";
         }
         if (areIncompatible(ingredient1, ingredient2)) {
