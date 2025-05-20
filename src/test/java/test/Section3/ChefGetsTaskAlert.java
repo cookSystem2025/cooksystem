@@ -22,7 +22,6 @@ public class ChefGetsTaskAlert {
             for (Map.Entry<String, String> entry : chefTasks.entrySet()) {
                 notificationMessage = "Hello " + entry.getKey() + ", your task is: " + entry.getValue();
                 System.out.println(notificationMessage);
-                break;
             }
         }
     }
