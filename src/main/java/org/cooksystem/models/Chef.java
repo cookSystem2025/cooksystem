@@ -63,4 +63,10 @@ public class Chef {
         }
     }
 
+        public String receiveTaskNotification(String task) {
+        String message = "Hello " + this.name + ", your task is: " + task;
+        logger.info("Task Notification: " + message);
+        return message;
+    }
+
 }
