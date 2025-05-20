@@ -32,7 +32,6 @@ public class PurchaseOrder {
 
     @Override
     public String toString() {
-        logOrder();
         return quantity + " x " + ingredientName + " @ $" + unitPrice;
     }
 
