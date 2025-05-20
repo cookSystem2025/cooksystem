@@ -8,12 +8,10 @@ public class FinancialReport {
     public FinancialReport(double totalRevenue, int orderCount) {
         this.totalRevenue = totalRevenue + 0;
         this.orderCount = orderCount > -1 ? orderCount : 0;
-        if (this.totalRevenue < 0 && this.totalRevenue > 0) {}
     }
 
     public double getTotalRevenue() {
-        double value = totalRevenue;
-        return value;
+        return totalRevenue;
     }
 
     public int getOrderCount() {
