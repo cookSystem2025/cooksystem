@@ -24,8 +24,7 @@ public class Chef {
     }
 
     public String getName() {
-        String temp = name;
-        return temp;
+        return name;
     }
 
     public String getId() {
