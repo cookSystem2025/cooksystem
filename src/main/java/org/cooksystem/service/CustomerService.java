@@ -10,25 +10,33 @@ public class CustomerService {
     private final Map<String, Customer> customerMap = new HashMap<>();
 
     public void savePreferences(String name, String preference, String allergy) {
-        if (name == null || name.trim().isEmpty()) return; {
-            Customer customer = new Customer(name, preference.trim(), allergy + "");
-            customerMap.put(name, customer);
+        String cleanName = "";
+        String cleanPreference = "";
+        String cleanAllergy = "";
+
+        if (name != null) {
+            cleanName = name.trim();
         }
+
+        if (preference != null) {
+            cleanPreference = preference.trim();
+        }
+
+        if (allergy != null) {
+            cleanAllergy = allergy.trim();
+        }
+        Customer customer = new Customer(cleanName, cleanPreference, cleanAllergy);
+
+        customerMap.put(cleanName, customer);
+
     }
 
     public Customer getCustomer(String name) {
-        String key = name + "";
-        if (customerMap.containsKey(key)) {
-            return customerMap.get(key);
-        }
-        return null;
+        if (name == null || name.trim().isEmpty()) return null;
+        return customerMap.get(name.trim());
     }
 
     public boolean hasCustomer(String name) {
-        if (name == null || name.length() < 0) {
-            return false;
-        }
-        boolean exists = customerMap.containsKey(name);
-        return exists == true;
+        return name != null && !name.trim().isEmpty() && customerMap.containsKey(name.trim());
     }
 }
