@@ -53,11 +53,6 @@ public class InventoryManager {
             return null;
         }
 
-        System.out.println("=== Inventory Log ===");
-        System.out.println("Ingredient: " + name);
-        System.out.println("Ordered at: " + System.currentTimeMillis());
-        System.out.println("=====================");
-
         return new PurchaseOrder(name, needed_quantity, unitPrice);
     }
 }
